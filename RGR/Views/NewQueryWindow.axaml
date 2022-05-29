@@ -1,0 +1,36 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" 
+        x:Class="RGR.Views.NewQueryWindow"
+        Height="300"
+        Width="400"
+        CanResize="False"
+        Title="New Query Dialoge">
+  
+  <Grid RowDefinitions="*, 50" ColumnDefinitions="*" >
+    <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1" Margin="20 20 20 0">
+      <ListBox Background="White" Items="{Binding AllItems}" Name="mList">
+        <ListBox.Styles>
+          <Style Selector="ListBoxItem">
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="1" />
+          </Style>
+        </ListBox.Styles>
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <Border BorderBrush="Black" BorderThickness="1" Height="30">
+              <TextBlock Text="{Binding TableName}" HorizontalAlignment="Center" Height="20"/>
+            </Border>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+    </Border>
+    <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="50" HorizontalAlignment="Center" Margin="10">
+      <Button Content="OK" Name="OKbtn"/>
+      <Button Content="Cancel" Name="Cancelbtn"/>
+    </StackPanel>
+  </Grid>
+</Window>

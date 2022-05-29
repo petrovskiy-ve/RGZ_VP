@@ -1,0 +1,31 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:model="using:RGR.Models"
+        xmlns:data="using:System.Data"
+        mc:Ignorable="d"
+        Height="300"
+        Width="400"
+        CanResize="False"
+        x:Class="RGR.Views.GroupWindow"
+        Title="GroupWindow">
+  <Grid ColumnDefinitions="*, 100" Background="LightGray">
+    <Border BorderBrush="Black" BorderThickness="1">
+      <TreeView Background="White" Items="{Binding TargetQuery.Items}" Name="TreeView">
+        <TreeView.DataTemplates>
+          <TreeDataTemplate DataType="{x:Type model:MyQueryItem}" ItemsSource="{Binding Table.Columns}">
+            <TextBlock Text="{Binding TableName}"/>
+          </TreeDataTemplate>
+          <DataTemplate>
+            <TextBlock Text="{Binding ColumnName}"/>
+          </DataTemplate>
+        </TreeView.DataTemplates>
+      </TreeView>
+    </Border>
+    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+      <Button Content="OK" Click="OKClick" HorizontalAlignment="Stretch" Margin="10 0 10 10" HorizontalContentAlignment="Center"/>
+      <Button Content="Cancel" Click="CancelClick" HorizontalAlignment="Stretch" Margin="10 0 10 0" HorizontalContentAlignment="Center"/>
+    </StackPanel>
+  </Grid>
+</Window>

@@ -1,0 +1,78 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="RGR.Views.QueryWindow"
+        Title="QueryWindow">
+  
+
+  <Grid ColumnDefinitions="180, *, 0">
+    <Grid RowDefinitions=" 50, *" Grid.Column="0"  Background="SkyBlue">
+      <Button Content="New Query" Margin="8" Grid.Row="0" HorizontalAlignment="Center" Click="CreateQuery"/>
+      <Border Grid.Row="1"  Margin="10">
+        <ListBox Items="{Binding QueryItems}" Background="White" SelectedItem="{Binding TargetQuery}">
+          <ListBox.Styles>
+            <Style Selector="ListBoxItem">
+              <Setter Property="Height" Value="30" />
+              <Setter Property="Padding" Value="0" />
+              <Setter Property="Margin" Value="1" />
+            </Style>
+          </ListBox.Styles>
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <Border BorderBrush="Black" BorderThickness="1" Height="30">
+                <TextBlock Text="{Binding QueryName}" HorizontalAlignment="Center" Height="20"/>
+              </Border>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+      </Border>
+    </Grid>
+    
+    <Border Grid.Column="1" BorderThickness="1" BorderBrush="Black">
+      <Grid RowDefinitions="60, *" >
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Spacing="0" HorizontalAlignment="Center">
+          <TextBox Watermark="Query name" Text="{Binding TargetQuery.QueryName}" Height="32" Width="150" Background="White"/>
+          <Button Content="Delete" Margin="15"/>
+          <Button Content="Join" Click="JoinQuery" Margin="15"/>
+          <Button Content="Where" Click="WhereQuery" Margin="15"/>
+          <Button Content="Group" Click="GroupQuery" Margin="15"/>
+          <Button Content="RUN" Margin="15" Command="{Binding RunQuery}"/>
+        </StackPanel>
+      
+        <ItemsControl Items="{Binding TargetQuery.Items}"  Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Border BorderBrush="Black" BorderThickness="1" Width="210" Margin="0 0 10 0">
+                <Grid RowDefinitions="30, *">
+                  <Border BorderBrush="Black" BorderThickness="1"  Grid.Row="0">
+                    <TextBlock Text="{Binding TableName}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  </Border>
+                  <ScrollViewer Grid.Row="1" Margin="2">
+                    <ItemsControl Items="{Binding Items}" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="1">
+                      <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                          <CheckBox IsChecked="{Binding IsChecked}" Content="{Binding Name}"/>
+                        </DataTemplate>
+                      </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                  </ScrollViewer>
+                  
+                </Grid>
+              </Border>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </Grid>
+    </Border>
+    <ListBox Items="{Binding TargetQuery.Modifiers}" Grid.Column="2">
+      
+    </ListBox>
+  </Grid>
+</Window>
